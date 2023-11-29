@@ -2,9 +2,9 @@
 this is a demo project to order some pizza
 
 # Requirements
-Java 17
-Node 20
-Apache Maven 3.9.0
+- Java 17
+- Node 20
+- Apache Maven 3.9.0
 
 # Deploy
 To deploy the application you need to run this command: 
