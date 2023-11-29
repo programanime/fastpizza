@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
 import {
   CButton,
@@ -23,23 +24,22 @@ import { axiosClient } from '../../api'
 import { PizzaSize } from '../../constants'
 
 const Order = () => {
-  const [pizza, setPizza] = useState(window.pizza || {})
+  const pizza = useSelector((state) => state.pizza)
   const [size, setSize] = useState('MEDIUM')
   const [total, setTotal] = useState(pizza?.price || 0)
   const [toppings, setToppings] = useState([])
   const buy = () => {
-    debugger
     Swal.fire('Done!')
   }
   const calculateTotal = (size, toppings) => {
-    const toppingValue = toppings.filter((t) => t.checked).reduce((total, t) => t.price, 0)
+    const toppingValue = toppings.filter((t) => t.checked).reduce((total, t) => total + t.price, 0)
     setTotal(pizza.price * PizzaSize[size] + toppingValue)
     setSize(size)
     setToppings(toppings)
   }
 
   const addTopping = (topping) => {
-    topping.checked = !topping.checked
+    topping.checked = topping.checked === undefined ? true : !topping.checked
     calculateTotal(size, [...toppings])
   }
 

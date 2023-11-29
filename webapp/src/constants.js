@@ -1,4 +1,4 @@
-export const API_URL = '/api/'
+export const API_URL = 'http://dmolina:8080/api/'
 
 export const PizzaSize = {
   PERSONAL: 0.5,

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import {
@@ -15,10 +16,11 @@ import { CChartLine } from '@coreui/react-chartjs'
 import { axiosClient } from '../../api'
 
 const Home = () => {
+  const dispatch = useDispatch()
   const [data, setData] = useState([])
   const navigate = useNavigate()
   const buy = (pizza) => {
-    window.pizza = pizza
+    dispatch({ type: 'setPizza', pizza })
     navigate('/order')
   }
   useEffect(() => {
