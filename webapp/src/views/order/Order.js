@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
 import {
   CButton,
   CCard,
@@ -26,7 +27,10 @@ const Order = () => {
   const [size, setSize] = useState('MEDIUM')
   const [total, setTotal] = useState(pizza?.price || 0)
   const [toppings, setToppings] = useState([])
-  const checkout = () => {}
+  const buy = () => {
+    debugger
+    Swal.fire('Done!')
+  }
   const calculateTotal = (size, toppings) => {
     const toppingValue = toppings.filter((t) => t.checked).reduce((total, t) => t.price, 0)
     setTotal(pizza.price * PizzaSize[size] + toppingValue)
@@ -96,7 +100,7 @@ const Order = () => {
           </CRow>
           <CCardFooter>
             <CFormLabel>Total : ${total.toFixed(2)}</CFormLabel>
-            <CButton color="outline-success" className="mx-4" onClick={() => checkout(pizza)}>
+            <CButton color="outline-success" className="mx-4" onClick={() => buy(pizza)}>
               Buy
             </CButton>
           </CCardFooter>
