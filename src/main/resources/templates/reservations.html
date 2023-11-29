@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title></title>
+</head>
+<body>
+  <h1>home title</h1>
+  <div th:each="reservation: ${reservations}">
+      <p th:text="${reservation.roomId}"></p>
+      <p th:text="${reservation.roomName}"></p>
+      <p th:text="${reservation.roomNumber}"></p>
+      <p th:text="${reservation.firstName}"></p>
+      <p th:text="${reservation.lastName}"></p>
+  </div>
+</body>
+</html>
