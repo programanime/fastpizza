@@ -81,7 +81,7 @@ public class DemoApplication implements CommandLineRunner {
         this.pizzaRepository.save(new Pizza(
             null,
             "Meat Lovers",
-            "https://napolipizzalv.com/wp-content/uploads/2019/10/DSC_0956-min.png",
+            "https://sawepecomcdn.blob.core.windows.net/ph-web-ordering/Pizza_Hut_PL/Zdjecia/Refresh_26.10.23/WWW/1.PIZZE/pizza_supreme_1000x1000.jpg",
             "Hearty pizza with pepperoni, ham, sausage, bacon, and beef on a rich tomato sauce.",
             new BigDecimal(12.99)
         ));
