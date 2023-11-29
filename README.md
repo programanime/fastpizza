@@ -22,11 +22,11 @@ This application generally employs the MVC (Model-View-Controller) pattern. The 
 ![](doc/mvc.svg)
 
 ## React
-<img src="doc/react.png" alt="React Logo" width="200" "height"="200"><br/>
+<img src="doc/react.png" alt="React Logo" width="200" /><br/>
 The React application utilizes Core UI as the boilerplate for the project. It leverages Axios for API communication, React Router for page navigation, and Redux for state management.
 
 ## SpringBoot
-<img src="doc/springboot.png" alt="React Logo" width="200" "height"="200"><br/>
+<img src="doc/springboot.png" alt="React Logo" width="200" /><br/>
 The Spring Boot API relies heavily on Spring Data REST to construct endpoints based on repositories. Information is stored in an in-memory database known as [H2](https://www.h2database.com/html/main.html). JPA is utilized for creating entities, and Swagger has been integrated to provide the API documentation.
 
 # Notes (Things to improve)
