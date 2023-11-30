@@ -28,7 +28,8 @@ const Order = () => {
   const [size, setSize] = useState('MEDIUM')
   const [total, setTotal] = useState(pizza?.price || 0)
   const [toppings, setToppings] = useState([])
-  const buy = () => {
+  const buy = async () => {
+    await axiosClient.post('order', { pizza: pizza.name, price: total })
     Swal.fire('Done!')
   }
   const calculateTotal = (size, toppings) => {

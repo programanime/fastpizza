@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @RepositoryRestResource
 public interface PizzaRepository extends JpaRepository<Pizza, Integer> {
+    Pizza findByName(String name);
 }

@@ -28,8 +28,8 @@ const Orders = () => {
 
   useEffect(() => {
     const call = async () => {
-      const { data } = await axiosClient.get('orders')
-      setData(data._embedded.orders)
+      const { data } = await axiosClient.get('order')
+      setData(data)
     }
     call()
   }, [])
@@ -46,20 +46,16 @@ const Orders = () => {
                   <CTableRow>
                     <CTableHeaderCell>Name</CTableHeaderCell>
                     <CTableHeaderCell>Price</CTableHeaderCell>
-                    <CTableHeaderCell>Description</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
                   {data.map((item, index) => (
                     <CTableRow key={index}>
                       <CTableDataCell>
-                        <div>{item.username}</div>
+                        <div>{item.pizza}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{item.email}</div>
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div>{item.type}</div>
+                        <div>${item.price}</div>
                       </CTableDataCell>
                     </CTableRow>
                   ))}

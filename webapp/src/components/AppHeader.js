@@ -39,15 +39,16 @@ const AppHeader = () => {
         </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
-            <CNavLink to="/dashboard" component={NavLink}>
-              Dashboard
-            </CNavLink>
+            <CNavLink href="/">Pizzas</CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">Users</CNavLink>
+            <CNavLink href="#/orders">Orders</CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">Settings</CNavLink>
+            <CNavLink href="#/toppings">Toppings</CNavLink>
+          </CNavItem>
+          <CNavItem>
+            <CNavLink href="#/users">Users</CNavLink>
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav>
