@@ -1,5 +1,9 @@
 package com.fastspring.pizza.controllers;
-import com.fastspring.pizza.data.repositories.OrderRepository;
+import com.fastspring.pizza.data.dtos.OrderDTO;
+import com.fastspring.pizza.data.entities.Order;
+import com.fastspring.pizza.repositories.OrderRepository;
+import com.fastspring.pizza.repositories.PizzaRepository;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
@@ -8,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import com.fastspring.pizza.services.*;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 import java.util.Collection;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
@@ -18,102 +24,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/tours/{tourId}/ratings")
+@RequestMapping("/api/order")
 public class OrderController {
     private final OrderRepository orderRepository;
+    private final PizzaRepository pizzaRepository;
     
     public OrderController(
-        OrderRepository orderRepository
+        OrderRepository orderRepository,
+        PizzaRepository pizzaRepository
     ) {
         this.orderRepository = orderRepository;
+        this.pizzaRepository = pizzaRepository;
     }
     
-    // @PostMapping
-    // @ResponseStatus(HttpStatus.CREATED)
-    // public void createTourRating(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
-    //     Tour tour = findTour(tourId);
-    //     tourRatingRepository.save(
-    //         new TourRating(
-    //             new TourRatingPk(
-    //                 tour, ratingDto.getCustomerId()
-    //             ),
-    //             ratingDto.getScore(),
-    //             ratingDto.getComment()
-    //         )
-    //     );
-    // }
-
-    // @GetMapping
-    // public Page<RatingDto> getRatings(@PathVariable(value = "tourId") int tourId, Pageable pageable){
-    //     findTour(tourId);
-    //     Page<TourRating> ratings = tourRatingRepository.findByPkTourId(tourId, pageable);
-    //     return new PageImpl<>(
-    //         ratings.get().map(RatingDto::new).collect(Collectors.toList()),
-    //         pageable,
-    //         ratings.getTotalElements()
-    //     );
-    // }
-
-    // @GetMapping(path = "/average")
-    // public Map<String, Double> getAverage(@PathVariable(value = "tourId") int tourId) {
-    //     findTour(tourId);
-    //     return Map.of("average",tourRatingRepository.findByPkTourId(tourId).stream()
-    //         .mapToInt(TourRating::getScore).average()
-    //         .orElseThrow(() ->
-    //             new NoSuchElementException("Tour has no Ratings")
-    //         )
-    //     );
-    // }
-
-    // @PutMapping
-    // public RatingDto updateWithPut(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
-    //     TourRating rating = findTourRating(tourId, ratingDto.getCustomerId());
-    //     rating.setScore(ratingDto.getScore());
-    //     rating.setComment(ratingDto.getComment());
-    //     return new RatingDto(tourRatingRepository.save(rating));
-    // }
-    
-    // @PatchMapping
-    // public RatingDto updateWithPatch(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
-    //     TourRating rating = findTourRating(tourId, ratingDto.getCustomerId());
-    //     if (ratingDto.getScore() != null) {
-    //         rating.setScore(ratingDto.getScore());
-    //     }
-    //     if (ratingDto.getComment() != null) {
-    //         rating.setComment(ratingDto.getComment());
-    //     }
-    //     return new RatingDto(tourRatingRepository.save(rating));
-    // }
-
-    // @DeleteMapping(path = "/{customerId}")
-    // public void delete(@PathVariable(value = "tourId") int tourId, @PathVariable(value = "customerId") int customerId) {
-    //     TourRating rating = findTourRating(tourId, customerId);
-    //     tourRatingRepository.delete(rating);
-    // }
-
-    // private TourRating findTourRating(int tourId, int customerId) throws NoSuchElementException {
-    //     return tourRatingRepository.findByPkTourIdAndPkCustomerId(tourId, customerId).orElseThrow(() ->
-    //         new NoSuchElementException("Tour-Rating pair for request("+ tourId + " for customer" + customerId)
-    //     );
-    // }
-
-    // private Tour findTour(int tourId) throws NoSuchElementException {
-    //     return tourRepository.findById(tourId).orElseThrow(() ->
-    //         new NoSuchElementException("Tour does not exist " + tourId)
-    //     );
-    // }
-
-    // @ResponseStatus(HttpStatus.NOT_FOUND)
-    // @ExceptionHandler(NoSuchElementException.class)
-    // public String return400(NoSuchElementException ex) {
-    //     return ex.getMessage();
-    // }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createTourRating(@RequestBody @Validated OrderDTO orderDto) {
+        this.orderRepository.save(
+            new Order(
+                null,
+                this.pizzaRepository.findById(orderDto.getPizza()).orElseGet(null),
+                new BigDecimal(orderDto.getPrice())
+            )
+        );
+    }
 }

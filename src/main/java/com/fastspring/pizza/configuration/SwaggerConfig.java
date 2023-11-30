@@ -8,8 +8,8 @@ public class SwaggerConfig {
    @Bean
    public GroupedOpenApi publicApi() {
        return GroupedOpenApi.builder()
-               .group("fastpizza-rest")
-               .packagesToScan("com.fastspring.pizza")
-               .build();
+            .group("fastpizza-rest")
+            .packagesToScan("com.fastspring.pizza")
+            .build();
    }
 }

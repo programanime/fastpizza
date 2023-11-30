@@ -1,14 +1,7 @@
 package com.fastspring.pizza.services;
-import com.fastspring.pizza.data.repositories.UserRepository;
+import com.fastspring.pizza.repositories.UserRepository;
 import com.fastspring.pizza.data.entities.User;
 import com.fastspring.pizza.data.enums.UserType;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Date;
-import java.util.Collection;
-import com.fastspring.pizza.util.*;
 import org.springframework.stereotype.Service;
 import org.mindrot.jbcrypt.BCrypt;
 
