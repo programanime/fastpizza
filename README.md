@@ -1,5 +1,5 @@
 # Project
-this is a demo project to order some pizza
+spring boot learning project
 
 # Requirements
 - Java 17
